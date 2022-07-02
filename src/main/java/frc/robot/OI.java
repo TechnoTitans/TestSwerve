@@ -12,41 +12,75 @@ public class OI {
     public static final int XBOX_BTN_SELECT = 7;
     public static final int XBOX_BTN_START = 8;
 
-    private XboxController xbox;
+    private XboxController xboxMain;
+    private XboxController xboxCo;
 
     public OI() {
-        this.xbox = new XboxController(RobotMap.Controller);
+        xboxMain = new XboxController(RobotMap.MainController);
+        xboxCo = new XboxController(RobotMap.CoController);
     }
 
-    public double getXboxLeftY() {
-        return -this.xbox.getLeftY();
+    public double getXboxLeftYMain() { return -xboxMain.getLeftY(); }
+
+    public double getXboxLeftXMain() { return -xboxMain.getLeftX(); }
+
+    public double getXboxRightYMain() {
+        return xboxMain.getRightY();
     }
 
-    public double getXboxLeftX() {
-        return -this.xbox.getLeftX();
+    public double getXboxRightXMain() {
+        return xboxMain.getRightX();
     }
 
-    public double getXboxRightY() {
-        return this.xbox.getRightY();
+    public double getXboxLeftTriggerMain() {
+        return xboxMain.getLeftTriggerAxis();
     }
 
-    public double getXboxRightX() {
-        return this.xbox.getRightX();
+    public double getXboxRightTriggerMain(){return xboxMain.getRightTriggerAxis(); }
+
+    public double getXboxLeftYCo() { return -xboxCo.getLeftY(); }
+
+    public double getXboxLeftXCo() { return -xboxCo.getLeftX(); }
+
+    public double getXboxRightYCo() {
+        return xboxCo.getRightY();
     }
 
-    public double getXboxLeftTrigger() {
-        return this.xbox.getLeftTriggerAxis();
+    public double getXboxRightXCo() {
+        return xboxCo.getRightX();
     }
 
-    public double getXboxRightTrigger() {
-        return this.xbox.getRightTriggerAxis();
+    public double getXboxLeftTriggerCo() {
+        return xboxCo.getLeftTriggerAxis();
     }
 
-    public int getXboxPOV() {
-        return this.xbox.getPOV();
+    public double getXboxRightTriggerCo(){return xboxCo.getRightTriggerAxis(); }
+
+    public int getPOVCo() {
+        return xboxCo.getPOV();
     }
 
-    public XboxController getXbox() {
-        return this.xbox;
+    public XboxController getXboxMain() {
+        return xboxMain;
     }
+    public XboxController getXboxCo() {
+        return xboxCo;
+    }
+
+    public double deadband(double value, double deadband) {
+        if (-deadband <= value && value <= deadband) {
+            value = 0;
+        } else if (value > deadband) {
+            value -= deadband;
+            value *= (1 + deadband);
+        } else if (value < -deadband) {
+            value += deadband;
+            value *= (1 + deadband);
+        }
+        return value;
+    }
+
+
+
+
 }
