@@ -1,5 +1,6 @@
 package frc.robot.swerve;
 
+import com.ctre.phoenix.sensors.CANCoder;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.RobotController;
 import frc.robot.Constants;
@@ -8,11 +9,11 @@ import frc.robot.motor.TitanFX;
 public class SwerveModule {
 
     private final TitanFX drive, turn;
-    private final AnalogInput absoluteEncoder;
+    private final CANCoder absoluteEncoder;
     private boolean encoderReversed;
     private double encoderOffset;
 
-    public SwerveModule(TitanFX drive, TitanFX turn, AnalogInput absoluteEncoder, boolean encoderReversed) {
+    public SwerveModule(TitanFX drive, TitanFX turn, CANCoder absoluteEncoder, boolean encoderReversed) {
         this.drive = drive;
         this.turn = turn;
         this.absoluteEncoder = absoluteEncoder;
@@ -20,6 +21,18 @@ public class SwerveModule {
         this.encoderOffset = 0;
 
         this.turn.configPID(Constants.TurnkP, 0, 0);
+    }
+
+    public TitanFX getDrive() {
+        return drive;
+    }
+
+    public TitanFX getTurn() {
+        return turn;
+    }
+
+    public CANCoder getAbsoluteEncoder() {
+        return absoluteEncoder;
     }
 
     public double getDrivePosition() {
@@ -39,7 +52,7 @@ public class SwerveModule {
     }
 
     public double getAbsoluteEncoderRad() {
-        double angle = ((absoluteEncoder.getVoltage() / RobotController.getVoltage5V()) * 2 * Math.PI) - encoderOffset;
+        double angle = ((absoluteEncoder.getBusVoltage() / RobotController.getVoltage5V()) * 2 * Math.PI) - encoderOffset;
         return angle * (encoderReversed ? -1 : 1);
     }
 

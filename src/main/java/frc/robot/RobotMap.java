@@ -2,32 +2,39 @@ package frc.robot;
 
 public class RobotMap {
     //Controllers
-    public static final int Controller = 500;
+    public static final int MainController = 500;
+    public static final int CoController = 501;
 
-    //Motors
-    public static final int leftFront = 1;
-    public static final boolean leftFrontReverse = false;
+    // Front Left Swerve Module
+    public static final int FLDrive = 1;
+    public static final int FLTurn = 2;
+    public static final int FLEncoder = 10;
+    public static final boolean FLDriveRev = false;
+    public static final boolean FLTurnRev = false;
+    public static final boolean FLEncoderRev = false;
 
-    public static final int leftRear = 2;
-    public static final boolean leftRearReverse = false;
+    // Front Right Swerve Module
+    public static final int FRDrive = 3;
+    public static final int FRTurn = 4;
+    public static final int FREncoder = 11;
+    public static final boolean FRDriveRev = false;
+    public static final boolean FRTurnRev = false;
+    public static final boolean FREncoderRev = false;
 
-    public static final int rightFront = 3;
-    public static final boolean rightFrontReverse = false;
+    // Back Left Swerve Module
+    public static final int BLDrive = 5;
+    public static final int BLTurn = 6;
+    public static final int BLEncoder = 12;
+    public static final boolean BLDriveRev = false;
+    public static final boolean BLTurnRev = false;
+    public static final boolean BLEncoderRev = false;
 
-    public static final int rightRear = 4;
-    public static final boolean rightRearReverse = false;
+    // Back Right Swerve Module
+    public static final int BRDrive = 7;
+    public static final int BRTurn = 8;
+    public static final int BREncoder = 13;
+    public static final boolean BRDriveRev = false;
+    public static final boolean BRTurnRev = false;
+    public static final boolean BREncoderRev = false;
 
-    public static final int barrelEncoderA = 0;
-    public static final int barrelEncoderB = 1;
-    public static final boolean barrelRevered = false;
-
-    public static final int barrel = 5;
-    public static final boolean barrelReverse = false;
-
-    public static final int tilt = 6;
-    public static final boolean tiltReverse = false;
-
-    //Pneumatics
-    public static final int PCM = 0;
-    public static final int tshirtSolenoid = 0;
 }
