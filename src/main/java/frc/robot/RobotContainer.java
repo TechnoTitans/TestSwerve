@@ -5,8 +5,10 @@
 package frc.robot;
 
 import com.ctre.phoenix.sensors.CANCoder;
+import com.kauailabs.navx.frc.AHRS;
 import com.revrobotics.AnalogInput;
 import edu.wpi.first.wpilibj.Encoder;
+import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.DriveTeleop;
@@ -26,8 +28,13 @@ public class RobotContainer {
     public TitanFX BLDrive, BLTurn;
     public TitanFX BRDrive, BRTurn;
 
+    //Encoders
     public CANCoder FLEncoder, FREncoder, BLEncoder, BREncoder;
 
+    //Gyro
+    public AHRS navX;
+
+    //Swerve Modules
     public SwerveModule FrontLeft, FrontRight, BackLeft, BackRight;
 
     //Subsystems
@@ -39,7 +46,7 @@ public class RobotContainer {
     public RobotContainer() {
         oi = new OI();
 
-        //Drivetrain
+        //Swerve
         FLDrive = new TitanFX(RobotMap.FLDrive, RobotMap.FLDriveRev);
         FLTurn = new TitanFX(RobotMap.FLTurn, RobotMap.FLTurnRev);
         FLEncoder = new CANCoder(RobotMap.FLEncoder);
@@ -61,7 +68,9 @@ public class RobotContainer {
         BackLeft = new SwerveModule(BLDrive, BLTurn, BLEncoder, RobotMap.BLEncoderRev);
         BackRight = new SwerveModule(BRDrive, BRTurn, BREncoder, RobotMap.BREncoderRev);
 
-        drive = new Swerve(FrontLeft, FrontRight, BackLeft, BackRight);
+        navX = new AHRS(SPI.Port.kMXP);
+
+        drive = new Swerve(FrontLeft, FrontRight, BackLeft, BackRight, navX);
 
         driveTeleop = new DriveTeleop(drive, oi.getXboxLeftTrigger(), oi.getXboxRightTrigger(), oi.getXboxLeftX());
 
@@ -72,7 +81,6 @@ public class RobotContainer {
     }
 
     public Command getAutonomousCommand() {
-        // Unless you're crazy and want the big robot with the big scary air tanks to drive itself don't use this.
         return null;
     }
 }

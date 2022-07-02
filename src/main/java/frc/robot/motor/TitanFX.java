@@ -180,4 +180,5 @@ public class TitanFX extends WPI_TalonFX implements MotorController {
         if (Math.abs(speed) > 10) {
         }
     }
+
 }
